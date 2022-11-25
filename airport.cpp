@@ -47,6 +47,10 @@ void insert_route(string start_airport, string dest_airport, string airline) {
     airport_adj_list[start_airport].push_back(airlines);
 }
 
+void insert_airportName(string airportId, string airportName) {
+    airportId_toName.insert(airportId, airportName);
+}
+
 void read_airports_file(string filename) {
     filename = "airports.dat";
     ifstream in(filename);
@@ -63,8 +67,12 @@ void read_airports_file(string filename) {
                 words.push_back(substr);
             }
             string airportId = words[0];
+            string airportName = words[1];
             long double longitude = (long double) words[7];
             long double latitude = (long double) words[6];
+
+            insert_airportName(airportId, airportName);
+
             if (airportId == "\N" || latitude == "\N" || longitude == "\N") {
             } else {
                 insert_airport(airportId, longitude, latitude);
@@ -99,4 +107,17 @@ void read_routes_file(string filename) {
         }
     }
     in.close();
+}
+
+
+pair<double, double> get_location(string airportId) {
+    return locations[airportId];
+}
+
+vector<pair<string,string>> get_airport_adj(string airportId) {
+    return airport_adj_list[airportId];
+}
+
+string get_airportName(string airportId) {
+    return airportId_toName[airportId];
 }
