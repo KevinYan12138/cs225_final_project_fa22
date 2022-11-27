@@ -83,7 +83,7 @@ void read_airports_file(string filename) {
 }
 
 void read_routes_file(string filename) {
-    filename = "airports.dat";
+    filename = "routes.dat";
     ifstream in(filename);
 
     string line;
