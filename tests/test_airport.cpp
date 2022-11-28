@@ -1,7 +1,15 @@
 #include <catch2/catch_test_macros.hpp>
-#include "airport.cpp"
+#include "airport.hs"
+#include <iostream>
 
 using namespace std;
+
+int print_out();
+
+int print_out(){
+    cout << "aiport test start" << endl;
+    return 0;
+}
 
 TEST_CASE("Test Airport Reader 1","[weight=1][part=1]") {
     unordered_map<string, pair<long double, long double>> airports_list;

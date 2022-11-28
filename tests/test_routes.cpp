@@ -1,6 +1,13 @@
 #include "airport.h"
-#include "airport.cpp"
 #include "catch2/catch.hpp"
+#include <iostream>
+
+int print_out();
+
+int print_out(){
+    cout << "routes test start" << endl;
+    return 0;
+}
 
 TEST_CASE("Test file reading 1" "FileR1"){
     read_routes_file("testroutes.dat");
