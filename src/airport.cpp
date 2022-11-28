@@ -15,10 +15,10 @@ Airport::Airport() {}
 Airport::~Airport() {}
 
 long double Airport::calculate_dist(string start_airport, string dest_airport) {
-    long double start_longitude = start_airport.get(start_airport).first;
-    long double start_latitude = start_airport.get(start_airport).second;
-    long double dest_longitude = dest_airport.get(start_airport).first;
-    long double dest_latitude = dest_airport.get(start_airport).second;
+    long double start_longitude = locations[start_airport].first;
+    long double start_latitude = locations[start_airport].second;
+    long double dest_longitude = locations[dest_airport].first;
+    long double dest_latitude = locations[dest_airport].second;
 
     long double difflong = long2 - long1;
     long double difflat = lat2 - lat1;
