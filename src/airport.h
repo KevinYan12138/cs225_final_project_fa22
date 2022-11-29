@@ -17,7 +17,7 @@ class Airport{
         void read_airports_file(string filename);
         void read_routes_file(string filename);
 
-        pair<double, double> get_location(string airportId);
+        pair<long double, long double> get_location(string airportId);
         vector<pair<string,string>> get_airport_adj(string airportId);
         string get_airportName(string airportId);
 
