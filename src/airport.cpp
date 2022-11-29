@@ -20,8 +20,8 @@ long double Airport::calculate_dist(string start_airport, string dest_airport) {
     long double dest_longitude = locations[dest_airport].first;
     long double dest_latitude = locations[dest_airport].second;
 
-    long double difflong = long2 - long1;
-    long double difflat = lat2 - lat1;
+    long double difflong = dest_longitude - start_longitude;
+    long double difflat = dest_latitude - start_latitude;
  
     long double distance = pow(sin(difflat / 2), 2) + cos(start_latitude) * cos(dest_latitude) * pow(sin(difflong / 2), 2);
  
@@ -30,13 +30,15 @@ long double Airport::calculate_dist(string start_airport, string dest_airport) {
     long double r_of_earth = 6371;
      
     distance = distance * r_of_earth;
+
+    return distance;
 }
 
 void Airport::insert_airport(string airport_name, long double longitude, long double latitude) {
-    pair<string, string> location;
+    pair<long double, long double> location;
     location.first = longitude;
     location.second = latitude;
-    locations.insert(airport_name, location);
+    locations[airport_name] = location;
 }
 
 void Airport::insert_route(string start_airport, string dest_airport, string airline) {
@@ -68,8 +70,8 @@ void Airport::read_airports_file(string filename) {
             }
             string airportId = words[0];
             string airportName = words[1];
-            long double longitude = (long double) words[7];
-            long double latitude = (long double) words[6];
+            long double longitude = stold(words[7]);
+            long double latitude = stold(words[6]);
 
             insert_airportName(airportId, airportName);
 
