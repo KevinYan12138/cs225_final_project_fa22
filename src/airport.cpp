@@ -112,7 +112,7 @@ void Airport::read_routes_file(string filename) {
 }
 
 
-pair<double, double> Airport::get_location(string airportId) {
+pair<long double, long double> Airport::get_location(string airportId) {
     return locations[airportId];
 }
 
