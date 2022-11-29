@@ -50,7 +50,7 @@ void Airport::insert_route(string start_airport, string dest_airport, string air
 }
 
 void Airport::insert_airportName(string airportId, string airportName) {
-    airportId_toName.insert(airportId, airportName);
+    airportId_toName[airportId] = airportName;
 }
 
 void Airport::read_airports_file(string filename) {
@@ -75,10 +75,10 @@ void Airport::read_airports_file(string filename) {
 
             insert_airportName(airportId, airportName);
 
-            if (airportId == "\N" || latitude == "\N" || longitude == "\N") {
-            } else {
+            //if (airportId == "\N" || latitude == "\N" || longitude == "\N") {
+            //} else {
                 insert_airport(airportId, longitude, latitude);
-            }   
+            //}   
         }
     }
     in.close();
@@ -102,10 +102,10 @@ void Airport::read_routes_file(string filename) {
             string airlineId = words[1];
             string start_airportId = words[3];
             string dest_airportId = words[5];
-            if (airlineId == "\N" || start_airportId == "\N" || dest_airportId == "\N") {
-            } else {
-                insert_airport(start_airportId, dest_airportId, airlineId);
-            }   
+            //if (airlineId == "\N" || start_airportId == "\N" || dest_airportId == "\N") {
+            //} else {
+                insert_route(start_airportId, dest_airportId, airlineId);
+            //}   
         }
     }
     in.close();
