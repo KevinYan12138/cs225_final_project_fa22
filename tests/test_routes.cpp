@@ -5,11 +5,10 @@
 using namespace std;
 
 
-TEST_CASE("Test file reading 1" "FileR1"){
+TEST_CASE("Test file reading 1"){
     Airport airport;
-    airport.read_routes_file("testroutes.dat");
+    airport.read_routes_file("../tests/testroutes.dat");
     vector<pair<string,string>> vec1 = airport.get_airport_adj("2965");
-    // vector<pair<string,string>> testList = airport.get_airport_adj("2965");
     pair<string, string> test1;
     test1.first = "2990";
     test1.second = "410";

@@ -1,6 +1,5 @@
 #include <catch2/catch_test_macros.hpp>
 #include "airport.h"
-#include "airport.cpp"
 #include <iostream>
 
 using namespace std;
@@ -9,13 +8,15 @@ using namespace std;
 TEST_CASE("Test Airport Reader 1","[weight=1][part=1]") {
     //unordered_map<string, pair<long double, long double>> airports_list;
     Airport airport;
-    airport.read_airports_file("airports.dat");
+    airport.read_airports_file("../tests/test_airports.dat");
 
     pair<long double, long double> test1;
     test1.first = 145.391998291;
     test1.second = -6.081689834590001;
+
+    pair<long double, long double> in1 = airport.get_location("1");
     
-    REQUIRE(airport.get_location("1") == test1);
+    REQUIRE(test1.first - in1.first < 0.001);
 
     //REQUIRE(airport.get_location("24") == pair<-56.083099365200006, 51.3918991089>);
 

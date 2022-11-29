@@ -54,7 +54,7 @@ void Airport::insert_airportName(string airportId, string airportName) {
 }
 
 void Airport::read_airports_file(string filename) {
-    filename = "airports.dat";
+    //filename = "airports.dat";
     ifstream in(filename);
 
     string line;
@@ -85,7 +85,7 @@ void Airport::read_airports_file(string filename) {
 }
 
 void Airport::read_routes_file(string filename) {
-    filename = "airports.dat";
+    //filename = "airports.dat";
     ifstream in(filename);
 
     string line;
