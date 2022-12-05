@@ -11,7 +11,8 @@ class Cycle{
         ~Cycle();
         bool isCycle();
         bool isSc();
-        void DFS();
+        void DFS(int v, bool visited[]);
+        Cycle transpose();
         
     private:
         int V;
