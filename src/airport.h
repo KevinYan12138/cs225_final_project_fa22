@@ -20,7 +20,7 @@ class Airport{
         pair<long double, long double> get_location(string airportId);
         vector<pair<string,string>> get_airport_adj(string airportId);
         string get_airportName(string airportId);
-
+        unordered_map<string, vector<pair<string,string>>> getMap();
         
 
     private:

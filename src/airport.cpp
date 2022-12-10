@@ -123,3 +123,7 @@ vector<pair<string,string>> Airport::get_airport_adj(string airportId) {
 string Airport::get_airportName(string airportId) {
     return airportId_toName[airportId];
 }
+
+unordered_map<string, vector<pair<string,string>>> Airport::getMap(){
+    return airport_adj_list;
+}
