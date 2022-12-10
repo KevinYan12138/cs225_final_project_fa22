@@ -1,4 +1,4 @@
-#pragma once
+
 
 #include <string>
 #include <vector>
@@ -14,12 +14,13 @@ BFS::BFS(){
 BFS::~BFS(){
 
 };
-long double BFS::BFS(string start, string end/*, Airport airport*/){
-    if (airport_adj_list.find(start) == airport_adj_list.end() || airport_adj_list.find(end) == airport_adj_list.end())
-    {
-        cout<< " There are no routes from the input starting airport to the ending airport. Try again! " << endl;
-        return -1;
-    }
+long double BFS::BreadFirstSearch(string start, string end, Airport airport){
+    unordered_map<string, vector<pair<string,string>>> airport_adj_list = airport.getMap();
+    // if (airport_adj_list.find(start) == airport_adj_list.end() || airport_adj_list.find(end) == airport_adj_list.end())
+    // {
+    //     cout<< " There are no routes from the input starting airport to the ending airport. Try again! " << endl;
+    //     return -1;
+    // }
     
     if (start == end) return 0;
     vector<pair<string,string>> vec = airport_adj_list[start];
