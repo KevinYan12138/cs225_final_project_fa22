@@ -18,12 +18,21 @@ int main(){
         cin >> key;
         if(key == 1){
             cout << "Please enter the start airport name" << endl;
-            string name1;
-            string name2;
+            string startAirport;
+            string destAirport;
             cin >> name1;
             cout << "Please enter the destination airport name" << endl;
             cin >> name2;
 
+            Dijkstra dijkstra;
+            vector<Vertex> path = dijkstra.dijkstraSSSP(airport, airport.get_airportId(startAirport),  airport.get_airportId(destAirport));
+
+            for (unsigned long i = 0; i < path.size(); i++) {
+                if (i == path.size() - 1)
+                    cout << airport.get_airportName(path[i]) << std::endl;
+                else
+                    cout << path[i] << " -> ";
+            }
 
         }
         else if (key == 2){
