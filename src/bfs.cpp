@@ -12,7 +12,7 @@ BFS::BFS(){
 BFS::~BFS(){
 
 };
-vector<string> BFS::BreadFirstSearch(string start, Airport airport, vector<string> &bfs_list){ 
+vector<string> BFS::BreadthFirstSearch(string start, Airport airport, vector<string> &bfs_list){ 
     unordered_map<string, vector<pair<string,string>>> airport_adj_list = airport.getAdjList(); //read the routes file and store it in the unordered map
     // the keys of unordered map are the starting airport 
     // the first elements of the pairs in vector are destination, second elements are the airline ids
