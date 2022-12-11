@@ -13,11 +13,15 @@ using namespace std;
 
 class Dijkstra {
     public:
-        
+        /**
+        * construct a weighted graph
+        * @param airport - airport
+        */
         Graph dataProcess(Airport airport);
+
         /**
         * return the shortest path from source to destination
-        * @param g - graph
+        * @param airport - airport
         * @param source - the start airport
         * @param destination - the destination airport
         */

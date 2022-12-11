@@ -25,6 +25,10 @@ int main(){
 
             Dijkstra dijkstra;
             vector<Vertex> path = dijkstra.dijkstraSSSP(airport, airport.get_airportId(startAirport),  airport.get_airportId(destAirport));
+            if(path.size() == 0){
+                cout << "No path exists.";
+                continue;
+            }
 
             for (unsigned long i = 0; i < path.size(); i++) {
                 if (i == path.size() - 1)

@@ -9,7 +9,6 @@ Graph Dijkstra::dataProcess(Airport airport) {
     Graph g(true);
     unordered_map<string, vector<pair<string,string>>> map = airport.getAdjList();
     for (const auto & [source, destAndAirline] : map) {
-        //cout << key << ": " << value << endl;
         Vertex source_ = source;
         if (!g.vertexExists(source_)) {
             g.insertVertex(source_);
@@ -54,26 +53,13 @@ vector<Vertex> Dijkstra::dijkstraSSSP(Airport airport, Vertex source, Vertex des
 
     for (unsigned long i = 0; i < vertices.size(); ++i) {
         distances[vertices[i]] = INF;
-        previous[vertices[i]] = Vertex();
+        previous[vertices[i]] = "null";
         visited[vertices[i]] = false;
     }
     distances[source] = 0.0;
 
 
     while (pq.top().first != destination) {
-        /*
-        long double min = INF;
-        for (int i = 0; i < distances.size(); i++) {
-            if (visited[i] == false) {
-                if (min > distances[i]) {
-                    min = distances[i];
-                    minIdx = i;
-                }
-            }
-        }
-        Vertex u = vertices[minIdx];
-        visited[minIdx] = true;
-        */
         Vertex u = pq.top().first;
         vector<Vertex> adjVertices = g.getAdjacent(u);
         
@@ -90,11 +76,15 @@ vector<Vertex> Dijkstra::dijkstraSSSP(Airport airport, Vertex source, Vertex des
         }
         visited[u] = true;
 
-        // if(pq.empty()){
-        //     break;
-        // }
+        if(pq.empty()){
+            break;
+        }
     }
 
+    if(previous[destination] == "null"){
+        vector<Vertex> out;
+        return out;
+    }
     vector<Vertex> path;
     Vertex curr = destination;
     path.push_back(destination);
