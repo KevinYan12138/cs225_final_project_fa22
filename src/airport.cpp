@@ -68,15 +68,17 @@ void Airport::read_airports_file(string filename) {
                 getline(s_stream, substr, ',');
                 words.push_back(substr);
             }
+            if (words.size() > 14) continue;
             string airportId = words[0];
             string airportName = words[1];
-            long double longitude = stold(words[7]);
-            long double latitude = stold(words[6]);
+            
 
             insert_airportName(airportId, airportName);
 
             if (airportId == "\\N" || words[6] == "\\N" || words[7] == "\\N") {
             } else {
+                long double longitude = stold(words[7]);
+                long double latitude = stold(words[6]);
                 insert_airport(airportId, longitude, latitude);
             }   
         }
