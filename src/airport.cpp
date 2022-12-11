@@ -71,7 +71,7 @@ void Airport::read_airports_file(string filename) {
             }
             if (words.size() > 14) continue;
             string airportId = words[0];
-            string airportName = words[1];
+            string airportName = words[1].substr(1, words[1].size() - 2);
             
 
             insert_airportName(airportId, airportName);
@@ -126,7 +126,7 @@ string Airport::get_airportName(string airportId) {
     return airportId_toName[airportId];
 }
 
-string get_airportId(string airportName) {
+string Airport::get_airportId(string airportName) {
     return airportName_toId[airportName];
 }
 
