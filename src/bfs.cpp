@@ -26,17 +26,20 @@ vector<string> BFS::BreadFirstSearch(string start, Airport airport, vector<strin
     visited[start] = true;
     queue<string> q;
     q.push(start);
+    string temp = start;
     while (!q.empty())
     {
-        string temp = q.front();
-        bfs_list.push_back(temp);
+        temp = q.front();
+        
         q.pop();
+        bfs_list.push_back(temp);
+        
         for (size_t i = 0; i < airport_adj_list[temp].size(); i++)
         {
             if (!visited[airport_adj_list[temp].at(i).first])
             {
                 q.push(airport_adj_list[temp].at(i).first);
-                visited[temp] = 1;
+                visited[airport_adj_list[temp].at(i).first] = 1;
             }          
             
         }
