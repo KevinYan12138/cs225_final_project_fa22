@@ -4,12 +4,12 @@
 #include "bfs.h"
 using namespace std;
 
-TEST_CASE("Test BreadFirstSearch routes"){
+TEST_CASE("Test BreadthFirstSearch routes"){
     Airport airport;
     airport.read_routes_file("../routes.dat");
     vector<string> vec;
     BFS bfs;
-    vector<string> traversal = bfs.BreadFirstSearch("2990",airport,vec);  
+    vector<string> traversal = bfs.BreadthFirstSearch("2990",airport,vec);  
     cout << "the size of vector after traverse the whole route file starting from 2990 is ->" << traversal.size() << endl;
 
     for(size_t i = 0; i <traversal.size() ;i++){
@@ -29,13 +29,13 @@ TEST_CASE("Test BreadFirstSearch routes"){
     REQUIRE(traversal.at(0)=="2990");
 
 }
-TEST_CASE("Test BreadFirstSearch exceptions 1"){
+TEST_CASE("Test BreadthFirstSearch exceptions 1"){
     Airport airport;
     airport.read_routes_file("../tests/testroutes.dat");
     vector<string> vec;
     BFS bfs;
     cout << "BFS traversal start with 0" << endl;
-    vector<string> traversal = bfs.BreadFirstSearch("0",airport,vec);  
+    vector<string> traversal = bfs.BreadthFirstSearch("0",airport,vec);  
    
     for(size_t i =0; i < vec.size() ;i++){
         cout << vec[i] << endl;
@@ -44,13 +44,13 @@ TEST_CASE("Test BreadFirstSearch exceptions 1"){
     REQUIRE(traversal.empty());
 
 }
-TEST_CASE("Test BreadFirstSearch exceptions 2"){
+TEST_CASE("Test BreadthFirstSearch exceptions 2"){
     Airport airport;
     airport.read_routes_file("../tests/testroutes.dat");
     vector<string> vec;
     BFS bfs;
     cout << "BFS traversal start with 1111" << endl;
-    vector<string> traversal = bfs.BreadFirstSearch("1111",airport,vec);
+    vector<string> traversal = bfs.BreadthFirstSearch("1111",airport,vec);
     cout << "" << endl;
 
     for(size_t i =0; i < vec.size() ;i++){
@@ -59,12 +59,12 @@ TEST_CASE("Test BreadFirstSearch exceptions 2"){
     REQUIRE(traversal.empty());
 
 }
-TEST_CASE("Test BreadFirstSearch 1"){
+TEST_CASE("Test BreadthFirstSearch 1"){
     Airport airport;
     airport.read_routes_file("../tests/testroutes.dat");
     vector<string> vec;
     BFS bfs;
-    vector<string> traversal = bfs.BreadFirstSearch("4029",airport,vec);
+    vector<string> traversal = bfs.BreadthFirstSearch("4029",airport,vec);
     cout << "BFS traversal start with 4029" << endl;
    
     for(size_t i =0; i < vec.size() ;i++){
@@ -79,13 +79,13 @@ TEST_CASE("Test BreadFirstSearch 1"){
     REQUIRE(traversal.at(2)=="1111");
    
 }
-TEST_CASE("Test BreadFirstSearch 2"){
+TEST_CASE("Test BreadthFirstSearch 2"){
     Airport airport;
     airport.read_routes_file("../tests/testroutes.dat");
     vector<string> vec;
     BFS bfs;
     cout << "BFS traversal start with 2968" << endl;
-    vector<string> traversal = bfs.BreadFirstSearch("2968",airport,vec);
+    vector<string> traversal = bfs.BreadthFirstSearch("2968",airport,vec);
    
     for(size_t i =0; i < vec.size() ;i++){
        
