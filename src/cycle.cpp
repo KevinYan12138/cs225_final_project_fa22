@@ -2,44 +2,55 @@
 #include <algorithm>
 using namespace std;
 
+/*Description: Empty constructor of cycle, do nothing
+Input: None
+Output:None
+side effect: creat a cycle class
+*/
 cycle::cycle(){
-    V = 0;
+
 }
 
-cycle::cycle(Airport ap_list, vector<string> edges){
-    adj.reserve(edges.size());
-    for(size_t counter = 0; counter < edges.size(); counter++){
-        string target = edges[counter];
-        index[target] = counter;
-        adj[counter].push_back(target);
-        vector<pair<string,string>> temp = ap_list.get_airport_adj(target);
-        for(size_t j = 0; j < temp.size(); j++){
-            if(find(edges.begin(), edges.end(), temp[j].first) != edges.end()){
-                adj[counter].push_back(temp[j].first);
-                in_num[temp[j].first]++;
-            }
-        }
-    }
+cycle::cycle(int V_){
+    V = V_;
 }
 
 cycle::~cycle(){
 
 }
 
-void cycle::addAirport(Airport ap_list, string name){
-    vector<pair<string,string>> temp = ap_list.get_airport_adj(name);
-    index[name] = adj.size();
-    V++;
-    vector<string> input;
-    input.push_back(name);
-    for(size_t i = 0; i < temp.size(); i++){
-        input.push_back(temp[i].first);
-        if(i == 0){
-            continue;
-        }
-        in_num[temp[i].first]++;
+void cycle::creat_list(Airport ap_list, vector<string> edges){
+     V = edges.size();
+     for(int i = 0; i < V; i++){
+        vector<string> temp;
+        adj.push_back(temp);
     }
-    adj.push_back(input);
+    for(size_t counter = 0; counter < edges.size(); counter++){
+        string target = edges[counter];
+        index[target] = counter;
+        adj[counter].push_back(target);
+        string temp_id = ap_list.get_airportId(target);
+        vector<pair<string,string>> temp = ap_list.get_airport_adj(temp_id);
+        for(size_t j = 0; j < temp.size(); j++){
+            string name = ap_list.get_airportName(temp[j].first);
+            if(find(edges.begin(), edges.end(), name) != edges.end()){
+                adj[counter].push_back(name);
+                in_num[name]++;
+            }
+        }
+    }
+}
+
+
+int cycle::addAirport(vector<string> &temp_list, string name){
+    if((int)temp_list.size() == V){
+        return -1;
+    }
+    temp_list.push_back(name);
+    if((int)temp_list.size() == V){
+        return 2;
+    }
+    return 1;
 }
 
 
@@ -67,7 +78,11 @@ bool cycle::isSc(){
     for (n = 0; n < V; n++) {
         if (adj[n].size()-1 > 0) break;
     }
- 
+    
+    if(n == V){
+        return false;
+    }
+
     DFS(n, visited);
  
     for (int i = 0; i < V; i++) {
@@ -83,7 +98,7 @@ bool cycle::isSc(){
     cy.DFS(n, visited);
  
     for (int i = 0; i < V; i++) {
-        if (adj[i].size()-1 > 0 && visited[i] == false) return false;
+        if (cy.adj[i].size()-1 > 0 && visited[i] == false) return false;
     }
     return true;
 }
