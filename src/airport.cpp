@@ -87,7 +87,6 @@ void Airport::read_airports_file(string filename) {
 }
 
 void Airport::read_routes_file(string filename) {
-    //filename = "airports.dat";
     ifstream in(filename);
 
     string line;
@@ -126,6 +125,6 @@ string Airport::get_airportName(string airportId) {
     return airportId_toName[airportId];
 }
 
-unordered_map<string, vector<pair<string,string>>> Airport::getMap(){
+unordered_map<string, vector<pair<string,string>>> Airport::getAdjList(){
     return airport_adj_list;
 }

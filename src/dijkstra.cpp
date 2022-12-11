@@ -4,34 +4,6 @@ using namespace std;
 
 long double INF = 0x3f3f3f3f;
 
-/*
-DijkstraSSSP(G, s) {
-    foreach (Vertex v : G) {
-        d[v] = +inf
-        p[v] = NULL
-    }
-    d[s] = 0
-    
-    PriorityQueue Q // min distance, defined by d[v]
-    Q.buildHeap(G.vertices())
-    Graph T // "labeled set"
-    
-    repeat n times {
-        Vertex u = Q.removeMin()
-        T.add(u)
-        foreach (Vertex v : neighbors of u not in T) {
-            if cost(u, v) + d[u] < d[v] {
-                d[v] = cost(u, v) + d[u]
-                p[v] = u
-            }
-        }
-    }
-}
-*/
-
-//Dijkstra() {}
-//~Dijkstra() {}
-
 vector<Vertex> Dijkstra::dijkstraSSSP(Graph g, Vertex source, Vertex destination) {
     vector<Vertex> vertices = g.getVertices();
 
