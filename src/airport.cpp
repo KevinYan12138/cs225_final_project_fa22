@@ -51,6 +51,7 @@ void Airport::insert_route(string start_airport, string dest_airport, string air
 
 void Airport::insert_airportName(string airportId, string airportName) {
     airportId_toName[airportId] = airportName;
+    airportName_toId[airportName] = airportId;
 }
 
 void Airport::read_airports_file(string filename) {
@@ -123,6 +124,10 @@ vector<pair<string,string>> Airport::get_airport_adj(string airportId) {
 
 string Airport::get_airportName(string airportId) {
     return airportId_toName[airportId];
+}
+
+string get_airportId(string airportName) {
+    return airportName_toId[airportName];
 }
 
 unordered_map<string, vector<pair<string,string>>> Airport::getAdjList(){

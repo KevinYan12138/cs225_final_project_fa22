@@ -19,7 +19,7 @@ class Airport{
         // put airline route into adj list
         void insert_route(string start_airport, string dest_airport, string airline); 
 
-        // put corresponding airportId and name into map
+        // put corresponding airportId and name into maps
         void insert_airportName(string airportId, string airportName); 
         
         // read airport.dat
@@ -36,6 +36,9 @@ class Airport{
 
         // convert airportId to name
         string get_airportName(string airportId); 
+
+        // convert name to airportId
+        string get_airportId(string airportName); 
 
         // get adj list
         unordered_map<string, vector<pair<string,string>>> getAdjList();
@@ -55,9 +58,15 @@ class Airport{
         unordered_map<string, vector<pair<string,string>>> airport_adj_list; 
 
         /**
-         *key: start airport id 
+         *key: airport id 
          *value: airport name
         */
         unordered_map<string, string> airportId_toName; 
+
+        /**
+         *key: airport name 
+         *value: airport id
+        */
+        unordered_map<string, string> airportName_toId; 
 
 };
