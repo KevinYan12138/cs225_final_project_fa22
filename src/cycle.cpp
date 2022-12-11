@@ -2,14 +2,8 @@
 #include <algorithm>
 using namespace std;
 
-cycle::cycle(int V_){
-    this->V = V_;
-    vector<vector<string>> out;
-    for(int i = 0; i < V_; i++){
-        vector<string> temp;
-        temp.reserve(V_);
-        out.push_back(temp);
-    }
+cycle::cycle(){
+    V = 0;
 }
 
 cycle::cycle(Airport ap_list, vector<string> edges){
@@ -32,6 +26,22 @@ cycle::~cycle(){
 
 }
 
+void cycle::addAirport(Airport ap_list, string name){
+    vector<pair<string,string>> temp = ap_list.get_airport_adj(name);
+    index[name] = adj.size();
+    V++;
+    vector<string> input;
+    input.push_back(name);
+    for(size_t i = 0; i < temp.size(); i++){
+        input.push_back(temp[i].first);
+        if(i == 0){
+            continue;
+        }
+        in_num[temp[i].first]++;
+    }
+    adj.push_back(input);
+}
+
 
 
 bool cycle::isCycle(){
@@ -50,7 +60,7 @@ bool cycle::isSc(){
     visited.reserve(V);
 
     for (int i = 0; i < V; i++) {
-        visited[i] = false;
+        visited.push_back(false);
     }
  
     int n;
@@ -86,9 +96,12 @@ void cycle::DFS(int v, vector<bool>&visited){
 }
 
 cycle cycle::transpose() {
-    cycle c(V);
+    cycle c = cycle();
+    for(int i = 0; i < V; i++){
+        vector<string> temp;
+        c.adj.push_back(temp);
+    }
     for (int v = 0; v < V; v++){
-        list<int>::iterator i;
         for(auto i = adj[v].begin()+1; i != adj[v].end(); ++i){
             int indict = index[*i];
             c.adj[indict].push_back(adj[v][0]);

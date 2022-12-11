@@ -6,8 +6,9 @@
 
 class cycle{
     public:
-        cycle(int V_);
+        cycle();
         cycle(Airport ap_list, vector<string> edges);
+        void addAirport(Airport ap_list, string name);
         ~cycle();
         bool isCycle();
         bool isSc();
