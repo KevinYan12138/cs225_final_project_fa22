@@ -6,14 +6,15 @@
 #include <utility>
 
 #include "graph.h"
+#include "edge.h"
 
 using namespace std;
 
 class Dijkstra {
     public:
-        Dijkstra();
-        ~Dijkstra();
-        vector<Vertex> dijkstraSSSP(Graph<Vertex> g, Vertex source, Vertex destination);
+        //Dijkstra();
+        //~Dijkstra();
+        vector<Vertex> dijkstraSSSP(Graph g, Vertex source, Vertex destination);
 
     private:
         

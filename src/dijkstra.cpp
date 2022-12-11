@@ -29,10 +29,10 @@ DijkstraSSSP(G, s) {
 }
 */
 
-Dijkstra() {}
-~Dijkstra() {}
+//Dijkstra() {}
+//~Dijkstra() {}
 
-vector<Vertex> Dijkstra::dijkstraSSSP(Graph<Vertex> g, Vertex source, Vertex destination) {
+vector<Vertex> Dijkstra::dijkstraSSSP(Graph g, Vertex source, Vertex destination) {
     vector<Vertex> vertices = g.getVertices();
 
     // map of distance for each vertex
@@ -48,10 +48,10 @@ vector<Vertex> Dijkstra::dijkstraSSSP(Graph<Vertex> g, Vertex source, Vertex des
     // labeled set
     unordered_map<Vertex, bool> visited;
 
-    for (auto v = 0; v < vertices.size(); ++v) {
+    for (unsigned long i = 0; i < vertices.size(); ++i) {
         distances[vertices[i]] = INF;
         previous[vertices[i]] = Vertex();
-        visited[vertices[v]] = false;
+        visited[vertices[i]] = false;
     }
     distances[source] = 0.0;
 
@@ -70,21 +70,29 @@ vector<Vertex> Dijkstra::dijkstraSSSP(Graph<Vertex> g, Vertex source, Vertex des
         visited[minIdx] = true;
         */
         Vertex u = pq.top().first;
+        vector<Vertex> adjVertices = g.getAdjacent(u);
+        
         pq.pop();
-        for (Vertex v : g.getAdjacent(u)) {
+        for (Vertex v : adjVertices) {
             if (visited[v] == false) {
-                Vertex adj = g.getAdjacent(u)[v];
+                int vidx;
+                auto iter = find(adjVertices.begin(), adjVertices.end(), v);
+                if (iter != adjVertices.end()) {
+                    vidx = iter - adjVertices.begin();
+                } else { break; }
+                Vertex adj = adjVertices[vidx];
                 int cost = g.getEdgeWeight(u, adj);
-                if (cost + distances[u] < distances[adj]) {
-                    distances[adj] = cost + distances[u];
-                    pq.push(make_pair(distances[adj], adj));
-                    previous[adj] = u;
+                if (cost + distances[u] < distances[v]) {
+                    distances[v] = cost + distances[u];
+                    //pq.push(make_pair(distances[adj], adj));
+                    previous[v] = u;
                 }
             }
         }
         visited[u] = true;
     }
 
+    vector<Vertex> path;
     Vertex curr = destination;
     path.push_back(destination);
 
