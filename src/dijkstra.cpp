@@ -59,6 +59,8 @@ vector<Vertex> Dijkstra::dijkstraSSSP(Airport airport, Vertex source, Vertex des
     }
     distances[source] = 0.0;
 
+    int i = 0;
+    cout << i;
     while (pq.top().first != destination) {
         /*
         long double min = INF;
@@ -73,6 +75,7 @@ vector<Vertex> Dijkstra::dijkstraSSSP(Airport airport, Vertex source, Vertex des
         Vertex u = vertices[minIdx];
         visited[minIdx] = true;
         */
+        cout << i;
         Vertex u = pq.top().first;
         vector<Vertex> adjVertices = g.getAdjacent(u);
         
@@ -88,6 +91,11 @@ vector<Vertex> Dijkstra::dijkstraSSSP(Airport airport, Vertex source, Vertex des
             }
         }
         visited[u] = true;
+
+        // if(pq.empty()){
+        //     break;
+        // }
+        i++;
     }
 
     vector<Vertex> path;

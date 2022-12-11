@@ -12,8 +12,8 @@ TEST_CASE("Dijkstra") {
     SECTION("Path exists") {
         Dijkstra dijkstra;
         cout << "1" << endl;
-        Vertex source = "AER";
-        Vertex destination = "KZN";
+        Vertex source = "2965";
+        Vertex destination = "2990";
         vector<Vertex> path = dijkstra.dijkstraSSSP(airport, source, destination);
         cout << "2" << endl;
 
