@@ -10,19 +10,19 @@ int main(){
     int indict = 0;
     Airport airport;
     airport.read_routes_file("../routes.dat");
-    airport.read_airports_file("../aiports.dat");
-
+    airport.read_airports_file("../airports.dat");
 
     while(indict == 0){
         cout << "Please type 1 if you want to find shortest path; type 2 for cycles; type 3 to exit program." << endl;
-        cin >> key;
+        //cin >> key;
+        key = 1;
         if(key == 1){
             cout << "Please enter the start airport name" << endl;
             string startAirport;
             string destAirport;
-            cin >> name1;
+            getline(cin, startAirport);
             cout << "Please enter the destination airport name" << endl;
-            cin >> name2;
+            getline(cin, destAirport);
 
             Dijkstra dijkstra;
             vector<Vertex> path = dijkstra.dijkstraSSSP(airport, airport.get_airportId(startAirport),  airport.get_airportId(destAirport));
@@ -31,36 +31,37 @@ int main(){
                 if (i == path.size() - 1)
                     cout << airport.get_airportName(path[i]) << std::endl;
                 else
-                    cout << path[i] << " -> ";
+                    cout << airport.get_airportName(path[i]) << " -> ";
             }
 
         }
-        else if (key == 2){
-            int num;
-            cout << "Please enter the number of airports." << endl;
-            cin >> num;
-            cycle cyc = cycle(num);
-            string temp;
-            vector<string> bookkeeping;
-            for (int i = 0; i < num; i++){
-                cin >> temp;
-                if(cyc.addAirport(bookkeeping,temp) == 2){
-                    cyc.creat_list(airport, bookkeeping);
-                    break;
-                }
-            }
-            if(cyc.isCycle() == true){
-                cout << "There is a cyle." << endl;
-            }
-            else{
-                cout << "Cycle does not exist." << endl;
-            }
-        }
-        else if (key == 3){
-            indict = 1;
-        }
-        else{
-            cout << "Invalid number, please type again." << endl;
-        }
-    }
+        // else if (key == 2){
+        //     int num;
+        //     cout << "Please enter the number of airports." << endl;
+        //     cin >> num;
+        //     cycle cyc = cycle(num);
+        //     string temp;
+        //     vector<string> bookkeeping;
+        //     for (int i = 0; i < num; i++){
+        //         cin >> temp;
+        //         if(cyc.addAirport(bookkeeping,temp) == 2){
+        //             cyc.creat_list(airport, bookkeeping);
+        //             break;
+        //         }
+        //     }
+        //     if(cyc.isCycle() == true){
+        //         cout << "There is a cyle." << endl;
+        //     }
+        //     else{
+        //         cout << "Cycle does not exist." << endl;
+        //     }
+        // }
+    //     else if (key == 3){
+    //         indict = 1;
+    //     }
+    //     else{
+    //         cout << "Invalid number, please type again." << endl;
+    //     }
+    // }
+}
 }
