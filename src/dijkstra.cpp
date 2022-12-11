@@ -1,10 +1,37 @@
 #include "dijkstra.h"
+#include "airport.h"
 
 using namespace std;
 
 long double INF = 0x3f3f3f3f;
 
-vector<Vertex> Dijkstra::dijkstraSSSP(Graph g, Vertex source, Vertex destination) {
+Graph Dijkstra::dataProcess(Airport airport) {
+    Graph g(true);
+    unordered_map<string, vector<pair<string,string>>> map = airport.getAdjList();
+    for (const auto & [source, destAndAirline] : map) {
+        //cout << key << ": " << value << endl;
+        Vertex source_ = source;
+        if (!g.vertexExists(source_)) {
+            g.insertVertex(source_);
+        }
+        for (pair<string, string> i : destAndAirline) {
+            Vertex dest = i.first;
+            if (!g.vertexExists(dest)) {
+                g.insertVertex(dest);
+            }
+
+            if (!g.edgeExists(source_, dest)) {
+                g.insertEdge(source_, dest);
+                long double dis = airport.calculate_dist(source, i.first);
+                g.setEdgeWeight(source_, dest, dis);
+            }
+        }
+    }
+    return g;
+}
+
+vector<Vertex> Dijkstra::dijkstraSSSP(Airport airport, Vertex source, Vertex destination) {
+    Graph g = dataProcess(airport);
     vector<Vertex> vertices = g.getVertices();
 
     // map of distance for each vertex
@@ -14,7 +41,12 @@ vector<Vertex> Dijkstra::dijkstraSSSP(Graph g, Vertex source, Vertex destination
     unordered_map<Vertex, Vertex> previous;
 
     // min distance of all vertices order by distance
-    priority_queue<pair<Vertex, double>, vector<pair<Vertex, double>>, greater<pair<Vertex, double>>> pq;
+    struct Compare {
+        bool operator() (pair<Vertex, double> const& a, pair<Vertex, double> const& b) {
+            return a.second > b.second;
+        }
+    };
+    priority_queue<pair<Vertex, double>, vector<pair<Vertex, double>>, Compare> pq;
     pq.push(make_pair(source, 0));
     
     // labeled set
@@ -47,16 +79,10 @@ vector<Vertex> Dijkstra::dijkstraSSSP(Graph g, Vertex source, Vertex destination
         pq.pop();
         for (Vertex v : adjVertices) {
             if (visited[v] == false) {
-                int vidx;
-                auto iter = find(adjVertices.begin(), adjVertices.end(), v);
-                if (iter != adjVertices.end()) {
-                    vidx = iter - adjVertices.begin();
-                } else { break; }
-                Vertex adj = adjVertices[vidx];
-                int cost = g.getEdgeWeight(u, adj);
+                double cost = g.getEdgeWeight(u, v);
                 if (cost + distances[u] < distances[v]) {
                     distances[v] = cost + distances[u];
-                    //pq.push(make_pair(distances[adj], adj));
+                    pq.push(make_pair(v, distances[v]));
                     previous[v] = u;
                 }
             }
