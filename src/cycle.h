@@ -17,11 +17,10 @@ class cycle{
         cycle transpose();
         
     private:
-        int V;
-        Airport ap_list;
-        vector<vector<string>> adj;
-        vector<string>temp_save;
-        unordered_map<string, int> in_num;
-        unordered_map<string, int> index;
+        int V;      //the number of vertices
+        Airport ap_list;        // Airport struct
+        vector<vector<string>> adj;    //adjacency list for vertices 
+        unordered_map<string, int> in_num;  // Number of input edges for each vertex
+        unordered_map<string, int> index;   //Numbering index for each vertex 
 
 };
