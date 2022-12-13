@@ -28,4 +28,26 @@ Flights Checker will takes in the airports and routes dataset, clean and store t
   - "test_dijkstra.cpp" : Testcases for Dijkstra's algorithm
  
 ## Running the program:
+- In the <mark>cs225_final_project_fa22</mark> folder, run the following commands:
+  
+      >mkdir build 
+      >cd build
+      >cmake ..
+  
+- To run all the testcases, use the following commands:
+ 
+      >make test
+      >./test
 
+- To run a given testcase, run : 
+
+      >make test
+      >./test [testcase_you_want_to_run]
+
+- To run the user interface, run :
+
+      >make test
+      >./main
+     
+  - Enter 1 for shortest path; 2 for Euler's path detection; 3 to exit program
+  - Example output : <img width="1061" alt="image" src="https://user-images.githubusercontent.com/59171403/207223432-fff23a91-7362-4edd-9a53-83633e79f7c2.png">
